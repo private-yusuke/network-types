@@ -143,7 +143,7 @@ impl Ipv6Hdr {
 /// Protocol which is encapsulated in the IPv4 packet.
 /// <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>
 #[repr(u8)]
-#[derive(PartialEq, Eq, Debug, Copy, Clone)]
+#[derive(PartialEq, Eq, Debug, Copy, Clone, Hash)]
 pub enum IpProto {
     /// IPv6 Hop-by-Hop Option
     HopOpt = 0,
