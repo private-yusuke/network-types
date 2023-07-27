@@ -2,6 +2,9 @@ use core::mem;
 
 use crate::bitfield::BitfieldUnit;
 
+#[cfg(feature = "bincode")]
+use bincode::{Encode,Decode};
+
 /// IP headers, which are present after the Ethernet header.
 pub enum IpHdr {
     V4(Ipv4Hdr),
@@ -144,6 +147,7 @@ impl Ipv6Hdr {
 /// <https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml>
 #[repr(u8)]
 #[derive(PartialEq, Eq, Debug, Copy, Clone, Hash)]
+#[cfg_attr(feature = "bincode", derive(Encode, Decode))]
 pub enum IpProto {
     /// IPv6 Hop-by-Hop Option
     HopOpt = 0,
