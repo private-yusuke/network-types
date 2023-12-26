@@ -3,7 +3,10 @@ use core::mem;
 use crate::bitfield::BitfieldUnit;
 
 #[cfg(feature = "bincode")]
-use bincode::{Encode,Decode};
+use bincode::{Decode,Encode};
+
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
 
 /// IP headers, which are present after the Ethernet header.
 pub enum IpHdr {
@@ -148,6 +151,8 @@ impl Ipv6Hdr {
 #[repr(u8)]
 #[derive(PartialEq, Eq, Debug, Copy, Clone, Hash)]
 #[cfg_attr(feature = "bincode", derive(Encode, Decode))]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", serde(tag = "type"))]
 pub enum IpProto {
     /// IPv6 Hop-by-Hop Option
     HopOpt = 0,
